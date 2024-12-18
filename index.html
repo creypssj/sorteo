@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteo</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('./logoCreyps.jpeg');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            text-align: center;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #333;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Sorteo</h1>
+    <form id="sorteoForm">
+        <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre" required>
+        <input type="text" id="dni" name="dni" placeholder="Últimos 3 dígitos del DNI" maxlength="3" required>
+        <button type="submit">Participar</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('sorteoForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const nombre = document.getElementById('nombre').value;
+        const dni = document.getElementById('dni').value;
+
+        if (dni.length !== 3 || isNaN(dni)) {
+            alert("Por favor ingresa los últimos 3 dígitos válidos del DNI.");
+            return;
+        }
+
+        const mensaje = `Subject: Sorteo\nNombre: ${nombre}\nDNI: ${dni}`;
+        const numeroWhatsapp = '542645405149';  // Reemplaza con el número de WhatsApp al que quieras enviar el mensaje
+        const urlWhatsApp = `https://wa.me/${numeroWhatsapp}?text=${encodeURIComponent(mensaje)}`;
+
+        window.open(urlWhatsApp, '_blank');
+    });
+</script>
+
+</body>
+</html>
